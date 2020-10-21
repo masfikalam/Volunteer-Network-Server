@@ -21,7 +21,9 @@ client.connect(err => {
     
     // load all events
     app.get('/allEvents', (req, res) => {
-        eventList.find({})
+        const eventSearch = req.query.event;
+        console.log(eventSearch);
+        eventList.find({name: { $regex: eventSearch }})
         .toArray((err, docs) => res.send(docs))
     })
 
